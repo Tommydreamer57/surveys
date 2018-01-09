@@ -25,13 +25,28 @@ app.get(`/api/surveys`, (req, res) => {
 // GET ONE SURVEY
 app.get(`/api/surveys/:id`, (req, res) => {
     const db = req.app.get('db')
-    db.get_survey_by_id([req.params.id]).then(survey => {
-        survey = survey[0]
-        db.get_questions([req.params.id]).then(questions => {
-            survey.questions = questions
-            res.status(200).send(survey)
+    db.get_survey_by_id([req.params.id])
+        .then(survey => {
+            survey = survey[0]
+            db.get_questions([req.params.id])
+                .then(questions => {
+                    let counter = questions.length
+                    questions.map(question => {
+                        db.get_options([question.id])
+                            .then(options => {
+                                question.options = options
+                                counter--
+                                if (!counter) {
+                                    survey.questions = questions
+                                    res.status(200).send(survey)
+                                }
+                            })
+                            .catch(() => res.status(500).send(`survey ${survey.id} question ${question.id} option ${option.id} broke`))
+                    })
+                })
+                .catch(() => res.status(500).send(`survey ${survey.id} question ${question.id} broke`))
         })
-    })
+        .catch(() => res.status(500).send(`survey ${survey.id} broke`))
 })
 // CREATE SURVEY
 app.post(`/api/create`, (req, res) => {
