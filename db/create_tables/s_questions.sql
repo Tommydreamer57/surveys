@@ -2,7 +2,7 @@ CREATE TABLE S_Questions (
     id SERIAL PRIMARY KEY,
     type VARCHAR(50),
     name VARCHAR(100),
-    description VARCHAR(500),
+    instructions VARCHAR(500),
     survey_id INTEGER,
     previous_question_id INTEGER,
     next_question_id INTEGER,

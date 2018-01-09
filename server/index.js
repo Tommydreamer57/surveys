@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 require('dotenv').config();
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3010
 const CONNECTION_STRING = process.env.CONNECTION_STRING
 
 app.use(bodyParser.json())
+app.use(cors())
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
 
@@ -23,8 +25,12 @@ app.get(`/api/surveys`, (req, res) => {
 // GET ONE SURVEY
 app.get(`/api/surveys/:id`, (req, res) => {
     const db = req.app.get('db')
-    db.get_survey_by_id().then(survey => {
-        res.status(200).send(survey[0])
+    db.get_survey_by_id([req.params.id]).then(survey => {
+        survey = survey[0]
+        db.get_questions([req.params.id]).then(questions => {
+            survey.questions = questions
+            res.status(200).send(survey)
+        })
     })
 })
 // CREATE SURVEY

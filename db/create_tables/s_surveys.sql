@@ -1,4 +1,6 @@
 CREATE TABLE S_Surveys (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(200)
+    title VARCHAR(200),
+    description VARCHAR(5000),
+    author VARCHAR(200)
 )
