@@ -8,7 +8,7 @@ class Create extends Component {
         super()
         this.state = {
             questions: [],
-            addingQuestion: false
+            addingQuestion: true // change back to false later
         }
     }
     createQuestion = () => {
@@ -17,6 +17,7 @@ class Create extends Component {
         })
     }
     addQuestion = newQuestion => {
+        delete newQuestion.new
         this.setState({
             questions: [...this.state.questions, newQuestion],
             addingQuestion: false
@@ -24,6 +25,7 @@ class Create extends Component {
     }
     render = () => {
         let { questions } = this.state
+        console.log(questions)
         return (
             <div className="Create">
                 <h1>Create a New Survey</h1>

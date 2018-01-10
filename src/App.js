@@ -17,14 +17,14 @@ class App extends Component {
           <nav>
             <Navigation />
           </nav>
-          <content>
+          <section className="content">
             <Switch>
               <Route exact path="/" component={Dashboard} />
               <Route path="/create" component={Create} />
               <Route path="/survey/:id" component={Survey} />
               <Route path="/results/:id" component={Results} />
             </Switch>
-          </content>
+          </section>
           {/* </MuiThemeProvider> */}
         </div>
       </Router>
