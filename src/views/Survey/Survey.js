@@ -8,7 +8,11 @@ class Survey extends Component {
         super()
         this.state = {
             survey: {
-                questions: []
+                questions: [
+                    {
+                        response: null
+                    }
+                ]
             }
         }
     }
@@ -29,14 +33,14 @@ class Survey extends Component {
                 <h1>{survey.title}</h1>
                 <h2>{survey.description}</h2>
                 {
-                    this.state.survey.questions.map((question, i) => (
+                    survey.questions.map(question => (
                         <QuestionTile
-                        question={question}
-                        key={question.id}
+                            question={question}
+                            key={1000 + question.id}
                         />
                     ))
                 }
-                <h3>This survey was created by {this.state.survey.author}</h3>
+                <h3>This survey was created by {survey.author}</h3>
             </div>
         )
     }
