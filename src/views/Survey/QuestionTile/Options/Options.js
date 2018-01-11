@@ -22,7 +22,7 @@ function Options(props) {
                                 <input
                                     type="radio"
                                     value={question.response === option}
-                                    onChange={e => console.log(props.handleOptionChange(option.id, 'response', e.target.value))}
+                                    onChange={e => console.log(props.handleOptionChange)}
                                 />
                             </div>
                         ))
