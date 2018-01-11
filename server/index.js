@@ -52,7 +52,7 @@ app.get(`/api/surveys/:id`, (req, res) => {
                             .catch(() => res.status(200).send(survey))
                     })
                 })
-                .catch(() => res.status(500).send(`survey ${survey.id} broke`))
+                .catch(() => res.status(200).send(survey))
         })
         .catch(() => res.status(500).send(`survey broke`))
 })
