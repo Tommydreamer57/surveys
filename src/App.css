@@ -14,6 +14,10 @@ input::placeholder {
   color: rgba(255, 255, 255, 0.5) !important;
 }
 
+select option {
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .Option {
   display: flex;
   flex-flow: row wrap;

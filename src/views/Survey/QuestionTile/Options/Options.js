@@ -11,11 +11,19 @@ function Options(props) {
                             <div key={100 + option.id} className="Option">
                                 {
                                     question.new ?
-                                        <input value={option.label} />
+                                        <input
+                                            type="text"
+                                            value={option.label}
+                                            onChange={e => props.handleOptionChange(option.id, 'label', e.target.value)}
+                                        />
                                         :
                                         <h6 className="option-label">{option.label}</h6>
                                 }
-                                <input type="radio" value={question.response === option} />
+                                <input
+                                    type="radio"
+                                    value={question.response === option}
+                                    onChange={e => console.log(props.handleOptionChange(option.id, 'response', e.target.value))}
+                                />
                             </div>
                         ))
                     }
@@ -29,11 +37,19 @@ function Options(props) {
                             <div key={100 + option.id} className="Option">
                                 {
                                     question.new ?
-                                        <input value={option.label} />
+                                        <input
+                                            type="text"
+                                            value={option.label}
+                                            onChange={e => props.handleOptionChange(option.id, 'label', e.target.value)}
+                                        />
                                         :
                                         <h6 className="option-label">{option.label}</h6>
                                 }
-                                <input type="checkbox" value={option.response.includes(option)} />
+                                <input
+                                    type="checkbox"
+                                    value={option.response.includes(option)}
+                                    onChange={e => props.handleOptionChange(option.id, 'label', e.target.value)}
+                                />
                             </div>
                         ))
                     }
@@ -58,6 +74,7 @@ function Options(props) {
                         max={question.max}
                         step={question.step}
                         value={question.response}
+                        onChange={() => { }}
                     />
                 </div>
             )

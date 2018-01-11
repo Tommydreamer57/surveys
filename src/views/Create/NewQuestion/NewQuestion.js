@@ -26,7 +26,7 @@ class NewQuestion extends Component {
             instructions: '',
             options: [
                 {
-                    response: '',
+                    response: '' || 0 || [],
                     id: 0
                 }
             ],
@@ -36,10 +36,31 @@ class NewQuestion extends Component {
         }
     }
     addOption = () => {
-        let options = [...this.state.options, { response: '', id: this.state.options.length }]
+        let options = [
+            ...this.state.options,
+            {
+                response: '',
+                id: this.state.options.length
+            }
+        ]
         this.setState({
             options
         })
+    }
+    handleOptionChange = (id, target, value) => {
+        let options = this.state.options.map(option => {
+            if (option.id === id) {
+                if (target === 'response' && this.state.type === "MCM") {
+
+                }
+                option[target] = value
+            }
+            return option
+        })
+        this.setState({
+            options
+        })
+        return options // remove later
     }
     handleChange = (target, value) => {
         this.setState({
@@ -91,7 +112,7 @@ class NewQuestion extends Component {
                     value={this.state.instructions}
                     onChange={e => this.handleChange('instructions', e.target.value)}
                 />
-                <Options question={this.state} />
+                <Options question={this.state} handleOptionChange={this.handleOptionChange} />
                 {
                     addOptions ?
                         <button onClick={this.addOption} >+ Add Option</button>
